@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         toggleContent(this, btn1, con2, con1);
     });
 
+
     // Nucleotide change event listeners
     document.querySelectorAll('.nucleotide').forEach(element => {
         element.addEventListener('change', function () {
@@ -47,7 +48,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
         let nucleotide3 = document.getElementById('nucleotide3').value;
         let codon = nucleotide1 + nucleotide2 + nucleotide3;
         let aminoAcid = getAminoAcid(codon);
+        if (codon.includes("?")) {
+            document.getElementById('amino-acid-image').innerHTML = ``;
+            document.getElementById('rna-name-1').textContent="";
+        } else {
         document.getElementById('amino-acid-image').innerHTML = `<img src="images/${aminoAcid.name}.svg" alt="${aminoAcid.name}" class="bd-placeholder-img card-img-top" width="100%">`;
+        document.getElementById('rna-name-1').textContent= aminoAcid.name.slice(0, -3);
+        }
+        document.getElementById('show1').textContent=codon;
     }
 
     function getAminoAcid(codon) {
