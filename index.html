@@ -205,7 +205,7 @@
           <div class="mb-3">
             <label for="nucleotide1" class="form-label">Nucleotide 1 :</label>
             <select class="form-select nucleotide" id="nucleotide1">
-              <option selected value="X">...</option>
+              <option selected value="?">...</option>
               <option value="A">A</option>
               <option value="U">U</option>
               <option value="C">C</option>
@@ -215,7 +215,7 @@
           <div class="mb-3">
             <label for="nucleotide2" class="form-label">Nucleotide 2 :</label>
             <select class="form-select nucleotide" id="nucleotide2">
-              <option selected value="X">...</option>
+              <option selected value="?">...</option>
               <option value="A">A</option>
               <option value="U">U</option>
               <option value="C">C</option>
@@ -225,67 +225,26 @@
           <div class="mb-3">
             <label for="nucleotide3" class="form-label">Nucleotide 3 :</label>
             <select class="form-select nucleotide" id="nucleotide3">
-              <option selected value="X">...</option>
+              <option selected value="?">...</option>
               <option value="A">A</option>
               <option value="U">U</option>
               <option value="C">C</option>
               <option value="G">G</option>
             </select>
           </div>
-            <div class="row">
-              <div class="col-lg-10 col-sm-8 my-2">
-                <input type="text" class="form-control" placeholder="Display Box">
-              </div>
-                <button class="btn btn-outline-primary col-lg-2 col-sm-4 my-2" type="button">
-                    <svg class="bi" width="16" height="16"><use xlink:href="#x-lg"/></svg>
-                    <span class="visually-hidden">Dismiss</span>
-                  </button>
-            </div>
+          <div class="mb-3">
+            <label class="form-label">Sequence :</label>
+            <nav id="show1" type="text" class="form-control d-flex align-items-center text-white bg-purple rounded shadow-sm">???</nav>
+          </div>
         </div>
-        <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="images/ArginineARG.svg" alt="Your SVG Image">
 
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div class="row row-cols-12 g-3">
+
         <div class="col">
           <div class="card shadow-sm">
             <div id="amino-acid-image"></div>
             <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-body-secondary">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="images/ArginineARG.svg" alt="Your SVG Image">            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-body-secondary">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="images/AsparagineASN.svg" alt="Your SVG Image">
-                        <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-body-secondary">9 mins</small>
-              </div>
+              <p class="card-text" id="rna-name-1"></p>
             </div>
           </div>
         </div>
@@ -324,6 +283,7 @@
         
         
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
             <div class="col">
               <div class="card shadow-sm">
                 <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="images/PHE.svg" alt="Your SVG Image">
@@ -340,6 +300,7 @@
                 </div>
               </div>
             </div>
+
             <div class="col">
               <div class="card shadow-sm">
                 <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
