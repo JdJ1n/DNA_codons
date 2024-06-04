@@ -312,15 +312,31 @@
     
             <div class="row">
                 <div class="col-lg-10 col-sm-8 my-2">
+                  <label for="rna-sequence">RNA Sequence:</label>
                   <input type="text" id="rna-sequence" class="form-control" placeholder="Display Box">
                 </div>
+                
                   <button class="btn btn-outline-primary col-lg-2 col-sm-4 my-2" type="button">
                       <svg class="bi" width="16" height="16"><use xlink:href="#x-lg"/></svg>
                       <span class="visually-hidden">Dismiss</span>
-                    </button>
+                  </button>
             </div>
         </div>
-        
+        <div id="rna-display">hhhhhhhhhhh</div>
+        <div>
+          <table id="amino-acid-table" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Abbreviation</th>
+                    <th>Image</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 动态生成的内容将放置在这里 -->
+            </tbody>
+        </table>
+        </div>
         
         
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
