@@ -8,12 +8,6 @@
     <meta name="description" content="">
     <title>Projet 1 IFT3225</title>
 
-    <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/"> -->
-
-    
-
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"> -->
-
 <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
@@ -119,6 +113,16 @@
       </symbol>
     </svg>
 
+    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+        <symbol id="arrow-right-short" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
+        </symbol>
+        <symbol id="x-lg" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+          <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+        </symbol>
+      </svg>
+
     <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
       <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
               id="bd-theme"
@@ -188,21 +192,49 @@
         <p class="lead text-body-secondary">Something.</p>
         
         <p>
-          <a id="btn1" href="#" class="btn btn-primary my-2">Sélectionner 3 nucléotides de l'ARN</a>
-          <a id="btn2" href="#" class="btn btn-secondary my-2">Entrer une chaine d'ARN dans un champs texte</a>
+          <a id="btn1" href="#" class="btn btn-primary my-2 form-label col-8">Sélectionner 3 nucléotides de l'ARN</a>
+          <a id="btn2" href="#" class="btn btn-secondary my-2 form-label col-8">Entrer une chaine d'ARN dans un champs texte</a>
         </p>
       </div>
+      <!-- div class="container" id="con2">
+        <div class="mb-3">
+            <label for="customRange3" class="form-label">Vitesse de l'animation</label>
+            <input type="range" class="form-range" min="1" max="5" step="1" id="customRange3">
+            <div class="row">
+                <label for="customRange3" class="form-label col-md-6">Lente</label>
+                <div class="col-md-6 d-flex justify-content-end">
+                    <label for="customRange3" class="form-label">Rapide</label>
+                </div>
+            </div>
+        </div> -->
     </div>
   </section>
 
   <div class="album py-5 bg-body-tertiary">
     <div class="container" id="con1">
 
+        <div class="container">
+            <div class="row">
+                <button id="btn_u" class="btn btn-outline-secondary col-lg-3 col-sm-6 my-2" type="button">U</button>
+                <button id="btn_c" class="btn btn-outline-secondary col-lg-3 col-sm-6 my-2" type="button">C</button>
+                <button id="btn_a" class="btn btn-outline-secondary col-lg-3 col-sm-6 my-2" type="button">A</button>
+                <button id="btn_g" class="btn btn-outline-secondary col-lg-3 col-sm-6 my-2" type="button">G</button>
+            </div>
+            <div class="row">
+              <div class="col-lg-10 col-sm-8 my-2">
+                <input type="text" class="form-control" placeholder="Display Box">
+              </div>
+                <button class="btn btn-outline-primary col-lg-2 col-sm-4 my-2" type="button">
+                    <svg class="bi" width="16" height="16"><use xlink:href="#x-lg"/></svg>
+                    <span class="visually-hidden">Dismiss</span>
+                  </button>
+            </div>
+          </div>
+
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <div class="col">
           <div class="card shadow-sm">
-            <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="images/phenylalanine.svg" alt="Your SVG Image">
-
+            <img id="img_ala" class="bd-placeholder-img card-img-top" width="100%" height="225" src="images/AlanineALA.svg" alt="Your SVG Image">
             <div class="card-body">
               <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
               <div class="d-flex justify-content-between align-items-center">
@@ -217,8 +249,7 @@
         </div>
         <div class="col">
           <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-            <div class="card-body">
+            <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="images/ArginineARG.svg" alt="Your SVG Image">            <div class="card-body">
               <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
@@ -232,8 +263,8 @@
         </div>
         <div class="col">
           <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-            <div class="card-body">
+            <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="images/AsparagineASN.svg" alt="Your SVG Image">
+                        <div class="card-body">
               <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
@@ -248,8 +279,8 @@
 
         <div class="col">
           <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-            <div class="card-body">
+            <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="images/AspartateASP.svg" alt="Your SVG Image">
+                        <div class="card-body">
               <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
@@ -339,8 +370,32 @@
         </div>
       </div>
     </div>
+
+
+
     <div class="container" id="con2">
-        <textarea>haha</textarea>
+        <div class="mb-3">
+            <label for="customRange3" class="form-label">Vitesse de l'animation</label>
+            <input type="range" class="form-range" min="1" max="5" step="1" id="customRange3">
+            <div class="row">
+                <label for="customRange3" class="form-label col-6">Lente</label>
+                <div class="col-6 d-flex justify-content-end">
+                    <label for="customRange3" class="form-label">Rapide</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-10 col-sm-8 my-2">
+              <input type="text" class="form-control" placeholder="Display Box">
+            </div>
+              <button class="btn btn-outline-primary col-lg-2 col-sm-4 my-2" type="button">
+                  <svg class="bi" width="16" height="16"><use xlink:href="#x-lg"/></svg>
+                  <span class="visually-hidden">Dismiss</span>
+                </button>
+          </div>
+        
+        
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <div class="col">
               <div class="card shadow-sm">
@@ -503,21 +558,25 @@ document.addEventListener('DOMContentLoaded', (event) => {
   var con2 = document.querySelector('#con2');
 
   btn1.addEventListener('click', function() {
-    this.classList.toggle('btn-primary');
-    this.classList.toggle('btn-secondary');
-    btn2.classList.toggle('btn-primary');
-    btn2.classList.toggle('btn-secondary');
-    con1.style.display = 'block';
-    con2.style.display = 'none';
+    if (!this.classList.contains('btn-primary')) {
+      this.classList.toggle('btn-primary');
+      this.classList.toggle('btn-secondary');
+      btn2.classList.toggle('btn-primary');
+      btn2.classList.toggle('btn-secondary');
+      con1.style.display = 'block';
+      con2.style.display = 'none';
+    }
   });
 
   btn2.addEventListener('click', function() {
-    this.classList.toggle('btn-primary');
-    this.classList.toggle('btn-secondary');
-    btn1.classList.toggle('btn-primary');
-    btn1.classList.toggle('btn-secondary');
-    con1.style.display = 'none';
-    con2.style.display = 'block';
+    if (!this.classList.contains('btn-primary')) {
+      this.classList.toggle('btn-primary');
+      this.classList.toggle('btn-secondary');
+      btn1.classList.toggle('btn-primary');
+      btn1.classList.toggle('btn-secondary');
+      con1.style.display = 'none';
+      con2.style.display = 'block';
+    }
   });
 });
 </script>
@@ -525,6 +584,3 @@ document.addEventListener('DOMContentLoaded', (event) => {
 </body>
 </html>
 
-
-    </body>
-</html>
