@@ -30,10 +30,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
     });
 
-    // RNA sequence keyup event listener
-    document.getElementById('rna-sequence').addEventListener('keyup', function () {
-        displayRNASequence(this.value.toUpperCase());
-    });
+    
 
     // Helper functions
     function toggleContent(activeBtn, inactiveBtn, activeCon, inactiveCon) {
@@ -65,21 +62,47 @@ document.addEventListener('DOMContentLoaded', (event) => {
         return codonTable[codon] || { name: 'Unknown', abbrev: '???' };
     }
 
-    function displayRNASequence(sequence) {
-        let speed = parseInt(document.getElementById('animation-speed').value);
+    // RNA sequence keyup event listener
+    document.getElementById('rna-sequence').addEventListener('keyup', function () {
+        let rnaSequence = $('#rna-sequence').val().toUpperCase();
         document.getElementById('rna-display').innerHTML = '';
         document.querySelector('#amino-acid-table tbody').innerHTML = '';
+        displayRNASequence(this.value.toUpperCase());
+    });
 
-        sequence.match(/.{1,3}/g).forEach((codon, index) => {
-            setTimeout(() => {
-                let aminoAcid = getAminoAcid(codon);
-                document.querySelector('#amino-acid-table tbody').innerHTML += `
-                    <tr>
+    function displayRNASequence(sequence) {
+        // let speed = parseInt(document.getElementById('animation-speed').value);
+        // document.getElementById('rna-display').innerHTML = '';
+        // document.querySelector('#amino-acid-table tbody').innerHTML = '';
+
+        // sequence.match(/.{1,3}/g).forEach((codon, index) => {
+        //     let aminoAcid = getAminoAcid(codon);
+        //         document.querySelector('#amino-acid-table tbody').innerHTML += `
+        //             <tr>
+        //                 <td>${aminoAcid.name}</td>
+        //                 <td>${aminoAcid.abbrev}</td>
+        //                 <td><img src="images/${aminoAcid.name}.svg" alt="${aminoAcid.name}" class="amino-acid-image"></td>
+        //             </tr>`;
+        //     // setTimeout(() => {
+        //     //     // let aminoAcid = getAminoAcid(codon);
+        //     //     // document.querySelector('#amino-acid-table tbody').innerHTML += `
+        //     //     //     <tr>
+        //     //     //         <td>${aminoAcid.name}</td>
+        //     //     //         <td>${aminoAcid.abbrev}</td>
+        //     //     //         <td><img src="images/${aminoAcid.name}.svg" alt="${aminoAcid.name}" class="amino-acid-image"></td>
+        //     //     //     </tr>`;
+        //     // }, index * speed);
+        // });
+        for (let i = 0; i < sequence.length; i += 3) {
+            let codon = sequence.substr(i, 3);
+            $('#rna-display').append(`<span style="background-color:powderblue;">${codon}</span>`);
+            let aminoAcid = getAminoAcid(codon);
+                $('#amino-acid-table tbody').append(
+                    `<tr>
                         <td>${aminoAcid.name}</td>
                         <td>${aminoAcid.abbrev}</td>
                         <td><img src="images/${aminoAcid.name}.svg" alt="${aminoAcid.name}" class="amino-acid-image"></td>
-                    </tr>`;
-            }, index * speed);
-        });
+                    </tr>`
+                );}
     }
 });
