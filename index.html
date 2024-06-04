@@ -111,17 +111,14 @@
       <symbol id="sun-fill" viewBox="0 0 16 16">
         <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
       </symbol>
+      <symbol id="arrow-right-short" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
+      </symbol>
+      <symbol id="x-lg" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+        <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+      </symbol>
     </svg>
-
-    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
-        <symbol id="arrow-right-short" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
-        </symbol>
-        <symbol id="x-lg" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
-          <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
-        </symbol>
-      </svg>
 
     <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
       <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
@@ -189,7 +186,7 @@
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
         <h1 class="fw-light">Codons d'ARN</h1>
-        <p class="lead text-body-secondary">Something.</p>
+        <p class="lead text-body-secondary"></p>
         
         <p>
           <a id="btn1" href="#" class="btn btn-primary my-2 form-label col-8">Sélectionner 3 nucléotides de l'ARN</a>
@@ -205,12 +202,36 @@
     <div class="container" id="con1">
 
         <div class="container">
-            <div class="row">
-                <button id="btn_u" class="btn btn-outline-secondary col-md-3 col-lg-3 col-sm-6 my-2" type="button">U</button>
-                <button id="btn_c" class="btn btn-outline-secondary col-md-3 col-lg-3 col-sm-6 my-2" type="button">C</button>
-                <button id="btn_a" class="btn btn-outline-secondary col-md-3 col-lg-3 col-sm-6 my-2" type="button">A</button>
-                <button id="btn_g" class="btn btn-outline-secondary col-md-3 col-lg-3 col-sm-6 my-2" type="button">G</button>
-            </div>
+          <div class="mb-3">
+            <label for="nucleotide1" class="form-label">Nucleotide 1 :</label>
+            <select class="form-select nucleotide" id="nucleotide1">
+              <option selected value="X">...</option>
+              <option value="A">A</option>
+              <option value="U">U</option>
+              <option value="C">C</option>
+              <option value="G">G</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="nucleotide2" class="form-label">Nucleotide 2 :</label>
+            <select class="form-select nucleotide" id="nucleotide2">
+              <option selected value="X">...</option>
+              <option value="A">A</option>
+              <option value="U">U</option>
+              <option value="C">C</option>
+              <option value="G">G</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="nucleotide3" class="form-label">Nucleotide 3 :</label>
+            <select class="form-select nucleotide" id="nucleotide3">
+              <option selected value="X">...</option>
+              <option value="A">A</option>
+              <option value="U">U</option>
+              <option value="C">C</option>
+              <option value="G">G</option>
+            </select>
+          </div>
             <div class="row">
               <div class="col-lg-10 col-sm-8 my-2">
                 <input type="text" class="form-control" placeholder="Display Box">
@@ -221,11 +242,12 @@
                   </button>
             </div>
         </div>
+        <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="images/ArginineARG.svg" alt="Your SVG Image">
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <div class="col">
           <div class="card shadow-sm">
-            <img id="img_ala" class="bd-placeholder-img card-img-top" width="100%" height="225" src="images/AlanineALA.svg" alt="Your SVG Image">
+            <div id="amino-acid-image"></div>
             <div class="card-body">
               <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
               <div class="d-flex justify-content-between align-items-center">
@@ -363,36 +385,85 @@
   </div>
 </footer>
 <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
-
 <script>
-document.addEventListener('DOMContentLoaded', (event) => {
-  var btn1 = document.querySelector('#btn1');
-  var btn2 = document.querySelector('#btn2');
-  var con1 = document.querySelector('#con1');
-  var con2 = document.querySelector('#con2');
+  document.addEventListener('DOMContentLoaded', (event) => {
+    // Define the codon table
+    const codonTable = {
+        'AUG': { name: 'MethionineMET', abbrev: 'Met' },
+        'UUU': { name: 'PhenylalaninePHE', abbrev: 'Phe' },
+        'UUC': { name: 'PhenylalaninePHE', abbrev: 'Phe' },
+        // Add other codon mappings
+    };
 
-  btn1.addEventListener('click', function() {
-    if (!this.classList.contains('btn-primary')) {
-      this.classList.toggle('btn-primary');
-      this.classList.toggle('btn-secondary');
-      btn2.classList.toggle('btn-primary');
-      btn2.classList.toggle('btn-secondary');
-      con1.style.display = 'block';
-      con2.style.display = 'none';
-    }
-  });
+    // Initialize button and content variables
+    var btn1 = document.querySelector('#btn1');
+    var btn2 = document.querySelector('#btn2');
+    var con1 = document.querySelector('#con1');
+    var con2 = document.querySelector('#con2');
 
-  btn2.addEventListener('click', function() {
-    if (!this.classList.contains('btn-primary')) {
-      this.classList.toggle('btn-primary');
-      this.classList.toggle('btn-secondary');
-      btn1.classList.toggle('btn-primary');
-      btn1.classList.toggle('btn-secondary');
-      con1.style.display = 'none';
-      con2.style.display = 'block';
+    // Button click event listeners
+    btn1.addEventListener('click', function() {
+        toggleContent(this, btn2, con1, con2);
+    });
+
+    btn2.addEventListener('click', function() {
+        toggleContent(this, btn1, con2, con1);
+    });
+
+    // Nucleotide change event listeners
+    document.querySelectorAll('.nucleotide').forEach(element => {
+        element.addEventListener('change', function () {
+            updateAminoAcidImage();
+        });
+    });
+
+    // RNA sequence keyup event listener
+    document.getElementById('rna-sequence').addEventListener('keyup', function () {
+        displayRNASequence(this.value.toUpperCase());
+    });
+
+    // Helper functions
+    function toggleContent(activeBtn, inactiveBtn, activeCon, inactiveCon) {
+        if (!activeBtn.classList.contains('btn-primary')) {
+            activeBtn.classList.replace('btn-secondary', 'btn-primary');
+            inactiveBtn.classList.replace('btn-primary', 'btn-secondary');
+            activeCon.style.display = 'block';
+            inactiveCon.style.display = 'none';
+        }
     }
-  });
+
+    function updateAminoAcidImage() {
+        let nucleotide1 = document.getElementById('nucleotide1').value;
+        let nucleotide2 = document.getElementById('nucleotide2').value;
+        let nucleotide3 = document.getElementById('nucleotide3').value;
+        let codon = nucleotide1 + nucleotide2 + nucleotide3;
+        let aminoAcid = getAminoAcid(codon);
+        document.getElementById('amino-acid-image').innerHTML = `<img src="images/${aminoAcid.name}.svg" alt="${aminoAcid.name}" class="bd-placeholder-img card-img-top" width="100%">`;
+    }
+
+    function getAminoAcid(codon) {
+        return codonTable[codon] || { name: 'Unknown', abbrev: '???' };
+    }
+
+    function displayRNASequence(sequence) {
+        let speed = parseInt(document.getElementById('animation-speed').value);
+        document.getElementById('rna-display').innerHTML = '';
+        document.querySelector('#amino-acid-table tbody').innerHTML = '';
+
+        sequence.match(/.{1,3}/g).forEach((codon, index) => {
+            setTimeout(() => {
+                let aminoAcid = getAminoAcid(codon);
+                document.querySelector('#amino-acid-table tbody').innerHTML += `
+                    <tr>
+                        <td>${aminoAcid.name}</td>
+                        <td>${aminoAcid.abbrev}</td>
+                        <td><img src="images/${aminoAcid.name}.svg" alt="${aminoAcid.name}" class="amino-acid-image"></td>
+                    </tr>`;
+            }, index * speed);
+        });
+    }
 });
+
 </script>
 
 </body>

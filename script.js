@@ -15,7 +15,7 @@ $(document).ready(function () {
         let codon = nucleotide1 + nucleotide2 + nucleotide3;
         
         let aminoAcid = getAminoAcid(codon);
-        $('#amino-acid-image').html(`<img src="images/${aminoAcid.name}.png" alt="${aminoAcid.name}" class="amino-acid-image">`);
+        $('#amino-acid-image').html(`<img src="images/${aminoAcid.name}.svg" alt="${aminoAcid.name}" class="amino-acid-image">`);
     });
 
     // Part 2: Enter RNA Sequence
