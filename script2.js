@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         let nucleotide3 = document.getElementById('nucleotide3').value;
         let codon = nucleotide1 + nucleotide2 + nucleotide3;
         let aminoAcid = getAminoAcid(codon);
-        document.getElementById('amino-acid-image').innerHTML = `<img src="images/${aminoAcid.name}.svg" alt="${aminoAcid.name}" class="amino-acid-image">`;
+        document.getElementById('amino-acid-image').innerHTML = `<img src="images/${aminoAcid.name}.svg" alt="${aminoAcid.name}" class="bd-placeholder-img card-img-top" width="100%">`;
     }
 
     function getAminoAcid(codon) {
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     <tr>
                         <td>${aminoAcid.name}</td>
                         <td>${aminoAcid.abbrev}</td>
-                        <td><img src="images/${aminoAcid.name}.png" alt="${aminoAcid.name}" class="amino-acid-image"></td>
+                        <td><img src="images/${aminoAcid.name}.svg" alt="${aminoAcid.name}" class="amino-acid-image"></td>
                     </tr>`;
             }, index * speed);
         });

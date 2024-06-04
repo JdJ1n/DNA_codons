@@ -31,13 +31,11 @@ $(document).ready(function () {
     }
 
     function displayRNASequence(sequence) {
-        let speed = parseInt($('#animation-speed').val());
+        // let speed = parseInt($('#animation-speed').val());
         for (let i = 0; i < sequence.length; i += 3) {
             let codon = sequence.substr(i, 3);
-            $('#rna-display').append(`<span>${codon}</span>`);
-            setTimeout(function () {
-               
-                let aminoAcid = getAminoAcid(codon);
+            $('#rna-display').append(`<span style="background-color:powderblue;">${codon}</span>`);
+            let aminoAcid = getAminoAcid(codon);
                 $('#amino-acid-table tbody').append(
                     `<tr>
                         <td>${aminoAcid.name}</td>
@@ -45,6 +43,16 @@ $(document).ready(function () {
                         <td><img src="images/${aminoAcid.name}.png" alt="${aminoAcid.name}" class="amino-acid-image"></td>
                     </tr>`
                 );
+            setTimeout(function () {
+               
+                // let aminoAcid = getAminoAcid(codon);
+                // $('#amino-acid-table tbody').append(
+                //     `<tr>
+                //         <td>${aminoAcid.name}</td>
+                //         <td>${aminoAcid.abbrev}</td>
+                //         <td><img src="images/${aminoAcid.name}.png" alt="${aminoAcid.name}" class="amino-acid-image"></td>
+                //     </tr>`
+                // );
             }, i * speed);
         }
     }
