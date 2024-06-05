@@ -61,6 +61,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
         return codonTable[codon] || { name: 'Unknown', abbrev: '???' };
     }
 
+    document.getElementById('rna-sequence').addEventListener('input', function(e) {
+        var value = e.target.value;
+        var newValue = value.replace(/[^UCAGucag]/g, '');
+        if (value !== newValue) {
+            e.target.value = newValue;
+        }
+    });
+    
     // RNA sequence keyup event listener
     document.getElementById('rna-sequence').addEventListener('keyup', function () {
         displayRNASequence(this.value.toUpperCase());
