@@ -72,25 +72,52 @@ document.addEventListener('DOMContentLoaded', (event) => {
     
     // RNA sequence keyup event listener
     document.getElementById('rna-sequence').addEventListener('keyup', function () {
-        displayRNASequence(this.value.toUpperCase());
+        displayRNASequence(this.value.toUpperCase().match(/.{1,3}/g));
     });
     
     function displayRNASequence(sequence) {
         // let speed = parseInt(document.getElementById('animation-speed').value);
         document.getElementById('rna-display').innerHTML = '';
         document.querySelector('#amino-acid-table tbody').innerHTML = '';
-        for (let i = 0; i < sequence.length; i += 3) {
-            let codon = sequence.substr(i, 3);
+        for (let i = 0; i < sequence.length; i++) {
+            let codon = sequence[i];
+    
+            let span = document.createElement('span');
+            if ((i === sequence.length - 1 && codon.length === 3) || 
+                (i === sequence.length - 2 && sequence[sequence.length - 1].length < 3)) {
+                span.className = 'btn btn-primary form-label p-1 me-1';
+            }else{
+                span.className = 'p-1 me-1';
+            }
+            span.textContent = codon;
+            document.getElementById('rna-display').appendChild(span);
+    
+            let aminoAcid = getAminoAcid(codon);
+    
+            let tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${aminoAcid.name}</td>
+                <td>${aminoAcid.abbrev}</td>
+                <td><img src="images/${aminoAcid.name}.svg" alt="${aminoAcid.name}" class="img-fluid amino-acid-image"></td>
+            `;
+            document.querySelector('#amino-acid-table tbody').appendChild(tr);
+        }
+    }
 
-            // 创建并添加 span 元素
+    function displayRNASequence2(sequence) {
+        // let speed = parseInt(document.getElementById('animation-speed').value);
+        document.getElementById('rna-display').innerHTML = '';
+        document.querySelector('#amino-acid-table tbody').innerHTML = '';
+        for (let i = 0; i < sequence.length; i++) {
+            let codon = sequence[i];
+    
             let span = document.createElement('span');
             span.className = 'bg-info text-white p-1 me-1';
             span.textContent = codon;
             document.getElementById('rna-display').appendChild(span);
-
+    
             let aminoAcid = getAminoAcid(codon);
-
-            // 创建并添加表格行
+    
             let tr = document.createElement('tr');
             tr.innerHTML = `
                 <td>${aminoAcid.name}</td>
