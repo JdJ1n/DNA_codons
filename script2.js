@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         var value = e.target.value;
         var newValue = value.replace(/[^UCAGucag]/g, '');
         if (value !== newValue) {
+            alert('La séquence d\'ARN saisie est incorrecte. Veuillez vérifier et saisir à nouveau. Merci :)');
             e.target.value = newValue;
         }
     });
