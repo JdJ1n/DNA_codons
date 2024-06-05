@@ -12,6 +12,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var btn2 = document.querySelector('#btn2');
     var con1 = document.querySelector('#con1');
     var con2 = document.querySelector('#con2');
+    var speed = 3;
+    var rangeInput = document.getElementById('customRange3');
+    var curSeq;
+    var lstSeq;
+    var input = document.getElementById('rna-sequence');
+
+    input.addEventListener('select', function(event) {
+        event.target.setSelectionRange(input.value.length, input.value.length);
+    });
+
+    input.addEventListener('click', function() {
+        this.selectionStart = this.selectionEnd = this.value.length;
+    });
 
     // Button click event listeners
     btn1.addEventListener('click', function() {
@@ -20,6 +33,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     btn2.addEventListener('click', function() {
         toggleContent(this, btn1, con2, con1);
+    });
+
+    rangeInput.addEventListener('input', function() {
+        speed = this.value;
     });
 
     // Nucleotide change event listeners
@@ -61,21 +78,102 @@ document.addEventListener('DOMContentLoaded', (event) => {
         return codonTable[codon] || { name: 'Unknown', abbrev: '???' };
     }
 
-    document.getElementById('rna-sequence').addEventListener('input', function(e) {
-        var value = e.target.value;
-        var newValue = value.replace(/[^UCAGucag]/g, '');
-        if (value !== newValue) {
+    document.getElementById('rna-sequence').addEventListener('keydown', function(e) {
+        var key = e.key.toUpperCase();
+        if (['U', 'C', 'A', 'G', 'BACKSPACE'].indexOf(key) === -1) {
+            e.preventDefault();
             alert('La séquence d\'ARN saisie est incorrecte. Veuillez vérifier et saisir à nouveau. Merci :)');
-            e.target.value = newValue;
         }
     });
-    
-    // RNA sequence keyup event listener
-    document.getElementById('rna-sequence').addEventListener('keyup', function () {
-        displayRNASequence(this.value.toUpperCase().match(/.{1,3}/g));
+
+    document.getElementById('rna-sequence').addEventListener('paste', function(e) {
+        e.preventDefault();
     });
     
-    function displayRNASequence(sequence) {
+    
+    // RNA sequence input event listener
+    document.getElementById('rna-sequence').addEventListener('input', function(e) {
+        if(curSeq!=this.value.toUpperCase()){
+                lstSeq=curSeq;
+                curSeq=this.value.toUpperCase();
+                //curSeq=this.value.toUpperCase().match(/.{1,3}/g)
+        }
+        displayRNASequence(curSeq,lstSeq);
+    });
+    
+    function displayRNASequence(curSeq, lstSeq) {
+        let displayElement = document.getElementById('rna-display');
+        let tableBody = document.querySelector('#amino-acid-table tbody');
+        let cur = curSeq ? curSeq.match(/.{1,3}/g) : [];
+        let lst = lstSeq ? lstSeq.match(/.{1,3}/g) : [];
+    
+        if (curSeq && (!lstSeq || curSeq.length > lstSeq.length)) {
+            if(curSeq.length%3!=1){
+                displayElement.removeChild(displayElement.lastChild);
+                tableBody.removeChild(tableBody.lastChild);
+            }
+            let codon = cur[cur.length - 1];
+            let span = document.createElement('span');
+            span.className = 'btn btn-secondary form-label p-1 me-1';
+            span.textContent = codon;
+            if(codon.length==3){
+                if(curSeq.length>5){displayElement.lastChild.className = 'btn btn-secondary form-label p-1 me-1';}
+                setTimeout(function() {
+                    span.className = 'btn btn-primary form-label p-1 me-1 transition';
+                }, 3200/(2**speed)); // animation
+                
+            }
+            
+            displayElement.appendChild(span);
+    
+            let aminoAcid = getAminoAcid(codon);
+            let tr = document.createElement('tr');
+
+            setTimeout(function() {
+                tr.innerHTML = `
+                <td>${aminoAcid.name}</td>
+                <td>${aminoAcid.abbrev}</td>
+                <td><img src="images/${aminoAcid.name}.svg" alt="${aminoAcid.name}" class="img-fluid amino-acid-image"></td>
+            `;
+            }, 3200/(2**speed)); // animation
+            tableBody.appendChild(tr);
+            
+        }
+    
+        if (lstSeq && (!curSeq || curSeq.length < lstSeq.length)) {
+            displayElement.removeChild(displayElement.lastChild);
+            tableBody.removeChild(tableBody.lastChild);
+            if(lstSeq.length%3!=1)
+                {
+                    let codon = cur[cur.length - 1];
+            let span = document.createElement('span');
+            span.className = 'btn btn-secondary form-label p-1 me-1';
+            span.textContent = codon;
+            let lastele=displayElement.lastChild;
+            if(codon.length==2&&curSeq.length>3){
+                setTimeout(function() {
+                    lastele.className = 'btn btn-primary form-label p-1 me-1 transition';
+                }, 3200/(2**speed));
+            }
+            displayElement.appendChild(span);
+    
+            let aminoAcid = getAminoAcid(codon);
+            let tr = document.createElement('tr');
+            setTimeout(function() {
+                tr.innerHTML = `
+                <td>${aminoAcid.name}</td>
+                <td>${aminoAcid.abbrev}</td>
+                <td><img src="images/${aminoAcid.name}.svg" alt="${aminoAcid.name}" class="img-fluid amino-acid-image"></td>
+            `;
+            }, 3200/(2**speed)); // animation
+            tableBody.appendChild(tr);
+                }
+            
+        }
+    }
+    
+
+    function displayRNASequence2(sequence) {
         // let speed = parseInt(document.getElementById('animation-speed').value);
         document.getElementById('rna-display').innerHTML = '';
         document.querySelector('#amino-acid-table tbody').innerHTML = '';
@@ -83,16 +181,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
             let codon = sequence[i];
     
             let span = document.createElement('span');
-            span.className = 'p-1 me-1';
+            span.className = 'bg-info text-white p-1 me-1';
             span.textContent = codon;
             document.getElementById('rna-display').appendChild(span);
-    
-            if ((i === sequence.length - 1 && codon.length === 3) || 
-                (i === sequence.length - 2 && sequence[sequence.length - 1].length < 3)) {
-                setTimeout(function() {
-                    span.className = 'btn btn-primary form-label p-1 me-1 transition';
-                }, 1000); // animation
-            }
     
             let aminoAcid = getAminoAcid(codon);
     
@@ -106,17 +197,25 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     }
 
-    function displayRNASequence2(sequence) {
+    function displayRNASequence3(sequence,lastSeq) {
         // let speed = parseInt(document.getElementById('animation-speed').value);
         document.getElementById('rna-display').innerHTML = '';
         document.querySelector('#amino-acid-table tbody').innerHTML = '';
+        sequence=sequence.match(/.{1,3}/g);
         for (let i = 0; i < sequence.length; i++) {
             let codon = sequence[i];
     
             let span = document.createElement('span');
-            span.className = 'bg-info text-white p-1 me-1';
+            span.className = 'p-1 me-1';
             span.textContent = codon;
             document.getElementById('rna-display').appendChild(span);
+    
+            if ((i === sequence.length - 1 && codon.length === 3) || 
+                (i === sequence.length - 2 && sequence[sequence.length - 1].length < 3)) {
+                setTimeout(function() {
+                    span.className = 'btn btn-primary form-label p-1 me-1 transition';
+                }, 1200/speed); // animation
+            }
     
             let aminoAcid = getAminoAcid(codon);
     
