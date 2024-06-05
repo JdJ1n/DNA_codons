@@ -17,11 +17,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var curSeq;
     var lstSeq;
     var input = document.getElementById('rna-sequence');
-    var clear = document.getElementById('clear');
-
-    clear.addEventListener('click', function () {
-        input.clear;
-    });
 
     input.addEventListener('select', function (event) {
         event.target.setSelectionRange(input.value.length, input.value.length);
