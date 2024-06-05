@@ -46,8 +46,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
     });
 
-
-
     // Helper functions
     function toggleContent(activeBtn, inactiveBtn, activeCon, inactiveCon) {
         if (!activeBtn.classList.contains('btn-primary')) {
@@ -99,10 +97,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
         displayRNASequence5(curSeq, lstSeq);
     });
-
-    function delay(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
 
     function displayRNASequence(curSeq, lstSeq) {
         let displayElement = document.getElementById('rna-display');
