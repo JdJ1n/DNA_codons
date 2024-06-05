@@ -65,32 +65,23 @@ document.addEventListener('DOMContentLoaded', (event) => {
         document.querySelector('#amino-acid-table tbody').innerHTML = '';
         for (let i = 0; i < sequence.length; i += 3) {
             let codon = sequence.substr(i, 3);
-            $('#rna-display').append(`<span style="background-color:powderblue;">${codon}</span>`);
+
+            // 创建并添加 span 元素
+            let span = document.createElement('span');
+            span.className = 'bg-info text-white p-1 me-1';
+            span.textContent = codon;
+            document.getElementById('rna-display').appendChild(span);
+
             let aminoAcid = getAminoAcid(codon);
-                document.querySelector('#amino-acid-table tbody').append(
-                    `<tr>
-                        <td>${aminoAcid.name}</td>
-                        <td>${aminoAcid.abbrev}</td>
-                        <td><img src="images/${aminoAcid.name}.png" alt="${aminoAcid.name}" class="amino-acid-image"></td>
-                    </tr>`
-                );}
-        // sequence.match(/.{1,3}/g).forEach((codon, index) => {
-        //     let aminoAcid = getAminoAcid(codon);
-        //         document.querySelector('#amino-acid-table tbody').innerHTML += `
-        //             <tr>
-        //                 <td>${aminoAcid.name}</td>
-        //                 <td>${aminoAcid.abbrev}</td>
-        //                 <td><img src="images/${aminoAcid.name}.svg" alt="${aminoAcid.name}" class="amino-acid-image"></td>
-        //             </tr>`;
-        //     // setTimeout(() => {
-        //     //     // let aminoAcid = getAminoAcid(codon);
-        //     //     // document.querySelector('#amino-acid-table tbody').innerHTML += `
-        //     //     //     <tr>
-        //     //     //         <td>${aminoAcid.name}</td>
-        //     //     //         <td>${aminoAcid.abbrev}</td>
-        //     //     //         <td><img src="images/${aminoAcid.name}.svg" alt="${aminoAcid.name}" class="amino-acid-image"></td>
-        //     //     //     </tr>`;
-        //     // }, index * speed);
-        // });
+
+            // 创建并添加表格行
+            let tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${aminoAcid.name}</td>
+                <td>${aminoAcid.abbrev}</td>
+                <td><img src="images/${aminoAcid.name}.svg" alt="${aminoAcid.name}" class="img-fluid amino-acid-image"></td>
+            `;
+            document.querySelector('#amino-acid-table tbody').appendChild(tr);
+        }
     }
 });
