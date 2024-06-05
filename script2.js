@@ -83,14 +83,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
             let codon = sequence[i];
     
             let span = document.createElement('span');
-            if ((i === sequence.length - 1 && codon.length === 3) || 
-                (i === sequence.length - 2 && sequence[sequence.length - 1].length < 3)) {
-                span.className = 'btn btn-primary form-label p-1 me-1';
-            }else{
-                span.className = 'p-1 me-1';
-            }
+            span.className = 'p-1 me-1';
             span.textContent = codon;
             document.getElementById('rna-display').appendChild(span);
+    
+            if ((i === sequence.length - 1 && codon.length === 3) || 
+                (i === sequence.length - 2 && sequence[sequence.length - 1].length < 3)) {
+                setTimeout(function() {
+                    span.className = 'btn btn-primary form-label p-1 me-1 transition';
+                }, 1000); // animation
+            }
     
             let aminoAcid = getAminoAcid(codon);
     

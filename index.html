@@ -88,6 +88,10 @@
         display: block !important;
       }
 
+      .transition {
+        transition: all 1s ease-in-out;
+    }
+
       #con2 {
         display: none;
       }
@@ -270,15 +274,19 @@
             </div>
     
             <div class="row">
+              <label for="rna-sequence">RNA Sequence:</label>
                 <div class="col-lg-10 col-sm-8 my-2">
-                  <label for="rna-sequence">RNA Sequence:</label>
-                  <input type="text" id="rna-sequence" class="form-control" placeholder="Display Box">
+                  <input type="text" id="rna-sequence" class="form-control" placeholder="Veuillez saisir « U », « C », « A », « G » en majuscules ou en minuscules.">
                 </div>
                 
                   <button class="btn btn-outline-primary col-lg-2 col-sm-4 my-2" type="button">
                       <svg class="bi" width="16" height="16"><use xlink:href="#x-lg"/></svg>
                       <span class="visually-hidden">Dismiss</span>
                   </button>
+                <!-- <div class="row">
+                <nav id="rna" type="text" class="form-label form-control d-flex align-items-center bg-purple rounded shadow-sm"> </nav>
+                </div> -->
+                  
             </div>
         </div>
         <div class="mb-3">
