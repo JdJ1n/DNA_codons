@@ -26,6 +26,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
         this.selectionStart = this.selectionEnd = this.value.length;
     });
 
+    input.addEventListener('input', function (e) {
+        if (Math.abs(e.target.value.length - (e.target.oldValue || '').length) > 1) {
+            e.target.value = e.target.oldValue;
+        } else {
+            e.target.oldValue = e.target.value;
+        }
+    });
+
+
     // Button click event listeners
     btn1.addEventListener('click', function () {
         toggleContent(this, btn2, con1, con2);
@@ -95,7 +104,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             lstSeq = curSeq;
             curSeq = this.value.toUpperCase();
         }
-        displayRNASequence5(curSeq, lstSeq);
+        displayRNASequence6(curSeq, lstSeq);
     });
 
     function displayRNASequence(curSeq, lstSeq) {
@@ -331,5 +340,133 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         }
     }
+
+    function createSpinner() {
+        let col = document.createElement('tr');
+        col.innerHTML = `
+                <td class="col-4 col-sm-4">
+                    <div class="card shadow-sm card-min-height">
+                      <div class="card-body d-flex align-items-center justify-content-center">
+                        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="col-2 col-sm-2">
+                    <div class="card shadow-sm card-min-height">
+                      <div class="card-body d-flex align-items-center justify-content-center">
+                        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="col-6 col-sm-6">
+                    <div class="card shadow-sm card-min-height">
+                      <div class="card-body d-flex align-items-center justify-content-center">
+                        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </td>
+        `;
+        return col;
+    }
+
+    function createCodonSpan(codon) {
+        let span = document.createElement('span');
+        span.className = 'btn btn-secondary form-label p-1 me-1';
+        span.textContent = codon;
+        return span;
+    }
+
+    function updateAminoAcidTableRow(aminoAcid, container, speed) {
+        setTimeout(function () {
+            container.innerHTML = `<tr>
+                <td class="col-4 col-sm-4">
+                    <div class="card shadow-sm card-min-height">
+                      <div class="card-body d-flex align-items-center justify-content-center">
+                        <p class="card-text">${aminoAcid.name}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="col-2 col-sm-2">
+                    <div class="card shadow-sm card-min-height">
+                      <div class="card-body d-flex align-items-center justify-content-center">
+                        <p class="card-text">${aminoAcid.abbrev}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="col-6 col-sm-6">
+                    <div class="card shadow-sm card-min-height">
+                      <img class="card-img-top" src="images/${aminoAcid.name}.svg" alt="${aminoAcid.name}" height="225px">
+                    </div>
+                  </td>
+                  </tr>
+          `;
+        }, 3200 / (2 ** speed));
+    }
+
+    function displayRNASequence6(curSeq, lstSeq, speed) {
+        (function(capturedCurSeq, capturedLstSeq, capturedSpeed) {
+                const displayElement = document.getElementById('rna-display');
+                const tableBody = document.querySelector('#amino-acid-table tbody');
+                const cur = capturedCurSeq ? capturedCurSeq.match(/.{1,3}/g) : [];
+                const lst = capturedLstSeq ? capturedLstSeq.match(/.{1,3}/g) : [];
+                const animationDelay = 3200 / (2 ** capturedSpeed);
+                
+                if (capturedCurSeq && (!capturedLstSeq || capturedCurSeq.length > capturedLstSeq.length)) {
+                    if (capturedCurSeq.length % 3 != 1) {
+                        displayElement.removeChild(displayElement.lastChild);
+                    }
+                    let codon = cur[cur.length - 1];
+                    let span = createCodonSpan(codon);
+    
+                    if (codon.length == 1) {
+                        setTimeout(() => tableBody.appendChild(createSpinner()), animationDelay);
+                    }
+    
+                    let aminoAcid = getAminoAcid(codon);
+                    if (codon.length == 3) {
+                        if (capturedCurSeq.length > 5) { 
+                            var children = displayElement.children; 
+                            for (var i = 0; i < children.length; i++) {
+                                children[i].className = 'btn btn-secondary form-label p-1 me-1';
+                            }}
+                        setTimeout(() => {
+                            span.className = 'btn btn-primary form-label p-1 me-1 transition';
+                            updateAminoAcidTableRow(aminoAcid, tableBody.lastChild, capturedSpeed);
+                        }, animationDelay);
+                    }
+                    displayElement.appendChild(span);
+                }
+    
+                if (capturedLstSeq && (!capturedCurSeq || capturedCurSeq.length < capturedLstSeq.length)) {
+                    displayElement.removeChild(displayElement.lastChild);
+                        if (lst[lst.length - 1].length == 1) {
+                            setTimeout(() => {
+                                tableBody.removeChild(tableBody.lastChild);
+                            }, animationDelay);
+                        }
+                        let codon = cur[cur.length - 1];
+                        if (capturedLstSeq.length % 3 != 1) {
+                            let span = createCodonSpan(codon);
+                            let lastele = displayElement.lastChild;
+        
+                            if (codon.length == 2 && capturedCurSeq.length > 3) {
+                                setTimeout(() => {
+                                    lastele.className = 'btn btn-primary form-label p-1 me-1 transition';
+                                }, animationDelay);
+                            }
+                            displayElement.appendChild(span);
+                        }
+                        if (codon.length == 2) {
+                            let modifi = tableBody.lastChild;
+                            setTimeout(() => {
+                                modifi.innerHTML = createSpinner().innerHTML;
+                            }, animationDelay);
+                        }
+                }
+        })(curSeq, lstSeq, speed);
+    }
+
 
 });

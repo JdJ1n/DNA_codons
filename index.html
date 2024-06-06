@@ -97,6 +97,10 @@
     #con2 {
       display: none;
     }
+
+    .card-min-height {
+      min-height: 225px;
+    }
   </style>
 
 
@@ -215,10 +219,11 @@
         <div class="col-lg-6 col-md-8 mx-auto">
           <h1 class="fw-light">Codons d'ARN</h1>
           <p class="lead text-body-secondary"></p>
-
           <p>
-            <a id="btn1" href="#" class="btn btn-primary my-2 form-label col-8">Sélectionner 3 nucléotides de l'ARN</a>
-            <a id="btn2" href="#" class="btn btn-secondary my-2 form-label col-8">Entrer une chaine d'ARN dans un champs
+            <a id="btn1" href="#" class="btn btn-primary my-2 form-label col-10 col-sm-12">Sélectionner 3 nucléotides de
+              l'ARN</a>
+            <a id="btn2" href="#" class="btn btn-secondary my-2 form-label col-10 col-sm-12">Entrer une chaine d'ARN
+              dans un champs
               texte</a>
           </p>
         </div>
@@ -299,116 +304,34 @@
             </div>
           </div>
 
-          <div class="row">
+          <div class="mb-3">
             <label for="rna-sequence">RNA Sequence:</label>
-            <div class="col-lg-10 col-sm-8 my-2">
+            <div class="col-12">
               <input type="text" id="rna-sequence" class="form-control"
                 placeholder="Veuillez saisir « U », « C », « A », « G » en majuscules ou en minuscules.">
             </div>
+          </div>
 
-            <button id="clear" class="btn btn-outline-primary col-lg-2 col-sm-4 my-2" type="button">
-              <svg class="bi" width="16" height="16">
-                <use xlink:href="#x-lg" />
-              </svg>
-              <span class="visually-hidden">Dismiss</span>
-            </button>
-            <!-- <div class="row">
-                <nav id="rna" type="text" class="form-label form-control d-flex align-items-center bg-purple rounded shadow-sm"> </nav>
-                </div> -->
-
+          <div class="mb-3">
+            <div id="rna-display"></div>
+          </div>
+          <div class="row table-responsive">
+            <table id="amino-acid-table" class="table text-center table-bordered">
+              <thead>
+                <tr>
+                  <th class="col-4 col-sm-4">Nom entier</th>
+                  <th class="col-2 col-sm-2">Nom abrégé</th>
+                  <th class="col-6 col-sm-6">Image</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
           </div>
         </div>
-        <div class="mb-3">
-          <div id="rna-display"></div>
-        </div>
-        <div>
-          <table id="amino-acid-table" class="table table-bordered row row-cols-1 g-3">
-            <thead>
-              <tr>
-                <th>Full Name</th>
-                <th>Abbreviation</th>
-                <th>Image</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!--  -->
-            </tbody>
-          </table>
-        </div>
 
-        <!-- <div class="d-flex gap-2 justify-content-center py-5">
-          <button class="btn btn-primary" type="button" disabled>
-            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
-            <span class="visually-hidden" role="status">Loading...</span>
-          </button>
-          <button class="btn btn-primary" type="button" disabled>
-            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
-            <span role="status">Loading...</span>
-          </button>
-        </div> -->
+        <div id="amino-acid-cards" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"></div>
 
-        <div id="amino-acid-cards" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
-
-
-
-        </div>
-
-        <h2 class="display-6 text-center mb-4">Compare plans</h2>
-
-    <div class="table-responsive">
-      <table class="table text-center">
-        <thead>
-          <tr>
-            <th style="width: 34%;"></th>
-            <th style="width: 22%;">Free</th>
-            <th style="width: 22%;">Pro</th>
-            <th style="width: 22%;">Enterprise</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row" class="text-start">Public</th>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-          </tr>
-          <tr>
-            <th scope="row" class="text-start">Private</th>
-            <td></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <th scope="row" class="text-start">Permissions</th>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-          </tr>
-          <tr>
-            <th scope="row" class="text-start">Sharing</th>
-            <td></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-          </tr>
-          <tr>
-            <th scope="row" class="text-start">Unlimited members</th>
-            <td></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-          </tr>
-          <tr>
-            <th scope="row" class="text-start">Extra security</th>
-            <td></td>
-            <td></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
       </div>
 
   </main>
@@ -416,12 +339,12 @@
   <footer class="text-body-secondary py-5">
     <div class="container">
       <p class="float-end mb-1">
-        <a href="#">Haut de page</a>
+        <a href="#" class="btn btn-primary">Haut de page</a>
       </p>
     </div>
   </footer>
   <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="script2.js"></script>
+  <script src="script3.js"></script>
 
 </body>
 
