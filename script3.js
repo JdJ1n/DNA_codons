@@ -2,11 +2,37 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Definition de la table des codons
     // str.slice(0, -3);
     // str.slice(-3);
+    function createCodon(codons, name, abbrev) {
+        let obj = {};
+        codons.forEach(codon => {
+            obj[codon] = { codonName: name, abbrev: abbrev };
+        });
+        return obj;
+    }
+
     const codonTable = {
-        'AUG': { codonName: 'MethionineMET', abbrev: "Met" },
-        'UUU': { codonName: 'PhenylalaninePHE', abbrev: 'Phe' },
-        'UUC': { codonName: 'PhenylalaninePHE', abbrev: 'Phe' },
-        // Add other codon mappings
+        ...createCodon(['UUU', 'UUC'], 'PhenylalaninePHE', 'PHE'),
+        ...createCodon(['UUA', 'UUG'], 'LeucineLEU', 'LEU'),
+        ...createCodon(['UCU', 'UCC', 'UCA', 'UCG', 'AGU', 'AGC'], 'SerineSER', 'SER'),
+        ...createCodon(['UAU', 'UAC'], 'TyrosineTYR', 'TYR'),
+        ...createCodon(['UAA', 'UAG', 'UGA'], 'StopSTP', 'STP'),
+        ...createCodon(['UGU', 'UGC'], 'CysteineCYS', 'CYS'),
+        ...createCodon(['UGG'], 'TryptophaneTRP', 'TRP'),
+        ...createCodon(['CUU', 'CUC', 'CUA', 'CUG'], 'LeucineLEU', 'LEU'),
+        ...createCodon(['CCU', 'CCC', 'CCA', 'CCG'], 'ProlinePRO', 'PRO'),
+        ...createCodon(['CAU', 'CAC'], 'HistidineHIS', 'HIS'),
+        ...createCodon(['CAA', 'CAG'], 'GlutamineGLN', 'GLN'),
+        ...createCodon(['CGU', 'CGC', 'CGA', 'CGG', 'AGA', 'AGG'], 'ArginineARG', 'ARG'),
+        ...createCodon(['AUU', 'AUC', 'AUA'], 'IsoleucineILE', 'ILE'),
+        ...createCodon(['AUG'], 'MethionineMET', 'MET'),
+        ...createCodon(['ACU', 'ACC', 'ACA', 'ACG'], 'ThreonineTHR', 'THR'),
+        ...createCodon(['AAU', 'AAC'], 'AsparagineASN', 'ASN'),
+        ...createCodon(['AAA', 'AAG'], 'LysineLYS', 'LYS'),
+        ...createCodon(['GUU', 'GUC', 'GUA', 'GUG'], 'ValineVAL', 'VAL'),
+        ...createCodon(['GCU', 'GCC', 'GCA', 'GCG'], 'AlanineALA', 'ALA'),
+        ...createCodon(['GAU', 'GAC'], 'AspartateASP', 'ASP'),
+        ...createCodon(['GAA', 'GAG'], 'GlutamateGLU', 'GLU'),
+        ...createCodon(['GGU', 'GGC', 'GGA', 'GGG'], 'GlycineGLY', 'GLY'),
     };
 
     // Initialize button and content variables
@@ -105,7 +131,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         e.preventDefault();
     });
 
-    //main listener
+    // main listener
     input.addEventListener('input', function (e) {
         const newSeq = this.value.toUpperCase();
         if (curSeq !== newSeq) {
@@ -122,77 +148,82 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     // main function for function 2
     function displayRNASequence6(curSeq, lstSeq, speed) {
-        //console.log('curSeq: ', curSeq, 'lstSeq: ', lstSeq); 
         (function (capturedCurSeq, capturedLstSeq, capturedSpeed) {
-            //console.log('capturedCurSeq: ', capturedCurSeq, 'lstSeq: ', capturedLstSeq); 
             enqueueAction((callback) => {
-
                 const cur = capturedCurSeq ? capturedCurSeq.match(/.{1,3}/g) : [];
-
-                //add if bloc here to check the situation of STOP
-
-                const displayElement = document.getElementById('rna-display');
-                const tableBody = document.querySelector('#amino-acid-table tbody');
-                const animationDelay = 6400 / (2 ** capturedSpeed);
-
-                // added char to Seq
-                if (capturedCurSeq && (!capturedLstSeq || capturedCurSeq.length > capturedLstSeq.length)) {
-
-                    const codon = cur[cur.length - 1];
-                    const span = createCodonSpan(codon);
-                    const aminoAcid = getAminoAcid(codon);
-
-                    if (codon.length == 1) {
-                        //need to add 1 spinner for the table
-                        tableBody.appendChild(createSpinner());
-                    } else {
-                        // (codon from 1 bit to 2 bits) or (from 2 bits to 3 bits)
-                        // we dont change the last span already exist, but remove the original one and then add a new span
-                        displayElement.removeChild(displayElement.lastChild);
-                    }
-                    displayElement.appendChild(span);
-
-                    if (codon.length == 3) {
-                        //update and apply animations if a new codon is completed
-                        const lastSpan = displayElement.lastChild;
-                        updateSpan(lastSpan, animationDelay);
-                        updateAminoAcidTableRow(aminoAcid, tableBody.lastChild, animationDelay);
-                        //reset the style of previous span 
-                        if (cur.length > 1) {
-                            const secondLastSpan = displayElement.lastElementChild.previousElementSibling;
-                            resetSpan(secondLastSpan, animationDelay);
-                        }
+                //check the situation of STOP
+                let stopUpdate = false;
+                for (let i = 0; i < cur.length - 1; i++) {
+                    if (getAminoAcid(cur[i]).abbrev === 'STP') {
+                        stopUpdate = true;
+                        break;
                     }
                 }
 
-                //remove char from Seq
-                if (capturedLstSeq && (!capturedCurSeq || capturedCurSeq.length < capturedLstSeq.length)) {
-                    // remove the last span
-                    displayElement.removeChild(displayElement.lastChild);
+                if (!stopUpdate) {
+                    const displayElement = document.getElementById('rna-display');
+                    const tableBody = document.querySelector('#amino-acid-table tbody');
+                    const animationDelay = 6400 / (2 ** capturedSpeed);
+                    // added char to Seq
+                    if (capturedCurSeq && (!capturedLstSeq || capturedCurSeq.length > capturedLstSeq.length)) {
 
-                    const codon = cur[cur.length - 1];
-                    //if codon doesn't exist(empty Seq) or current codon has 3 bits, means we need to remove the last line of table.
-                    if (!codon || codon.length == 3) {
-                        tableBody.removeChild(tableBody.lastChild);
-                    } else {
-                        //otherwise we change the last line and the last span
+                        const codon = cur[cur.length - 1];
                         const span = createCodonSpan(codon);
-                        const lastSpan = displayElement.lastChild;
+                        const aminoAcid = getAminoAcid(codon);
+
+                        if (codon.length == 1) {
+                            //need to add 1 spinner for the table
+                            tableBody.appendChild(createSpinner());
+                        } else {
+                            // (codon from 1 bit to 2 bits) or (from 2 bits to 3 bits)
+                            // we dont change the last span already exist, but remove the original one and then add a new span
+                            displayElement.removeChild(displayElement.lastChild);
+                        }
                         displayElement.appendChild(span);
-                        if (codon.length == 2) {
-                            //(codon from 3 bits to 2 bits), reset the last completed span
-                            if (capturedCurSeq.length > 3) {
+
+                        if (codon.length == 3) {
+                            //update and apply animations if a new codon is completed
+                            const lastSpan = displayElement.lastChild;
+                            updateSpan(lastSpan, animationDelay);
+                            updateAminoAcidTableRow(aminoAcid, tableBody.lastChild, animationDelay);
+                            //reset the style of previous span 
+                            if (cur.length > 1) {
+                                const secondLastSpan = displayElement.lastElementChild.previousElementSibling;
+                                resetSpan(secondLastSpan, animationDelay);
+                            }
+                        }
+                    }
+
+                    //remove char from Seq
+                    if (capturedLstSeq && (!capturedCurSeq || capturedCurSeq.length < capturedLstSeq.length)) {
+                        // remove the last span
+                        displayElement.removeChild(displayElement.lastChild);
+
+                        const codon = cur[cur.length - 1];
+                        //if codon doesn't exist(empty Seq) or current codon has 3 bits, means we need to remove the last line of table.
+                        if (!codon || codon.length == 3) {
+                            tableBody.removeChild(tableBody.lastChild);
+                        } else {
+                            //otherwise we change the last line and the last span
+                            const span = createCodonSpan(codon);
+                            const lastSpan = displayElement.lastChild;
+                            displayElement.appendChild(span);
+                            if (codon.length == 2) {
+                                //(codon from 3 bits to 2 bits), reset the last completed span
+                                if (capturedCurSeq.length > 3) {
+                                    setTimeout(() => {
+                                        lastSpan.className = 'btn btn-primary form-label p-1 me-1 transition';
+                                    }, animationDelay);
+                                }
+                                const modify = tableBody.lastChild;
                                 setTimeout(() => {
-                                    lastSpan.className = 'btn btn-primary form-label p-1 me-1 transition';
+                                    modify.innerHTML = createSpinner().innerHTML;
                                 }, animationDelay);
                             }
-                            const modify = tableBody.lastChild;
-                            setTimeout(() => {
-                                modify.innerHTML = createSpinner().innerHTML;
-                            }, animationDelay);
-                        }
 
+                        }
                     }
+
                 }
                 callback();
             });
@@ -253,7 +284,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 <td class="col-4 col-sm-4">
                     <div class="card shadow-sm card-min-height transition" style="opacity: 0.1;">
                       <div class="card-body d-flex align-items-center justify-content-center">
-                        <p class="card-text">${aminoAcid.codonName}</p>
+                        <p class="card-text">${aminoAcid.codonName.slice(0, -3)}</p>
                       </div>
                     </div>
                   </td>
