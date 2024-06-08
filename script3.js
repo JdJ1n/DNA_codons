@@ -58,7 +58,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
             document.getElementById('amino-acid-image').innerHTML = ``;
             document.getElementById('rna-name-1').textContent = "";
         } else {
-            document.getElementById('amino-acid-image').innerHTML = `<img src="images/${aminoAcid.codonName}.svg" alt="${aminoAcid.codonName}" class="bd-placeholder-img card-img-top" width="100%">`;
+            document.getElementById('amino-acid-image').innerHTML =
+                `<img src="images/${aminoAcid.codonName}.svg" alt="${aminoAcid.codonName}" class="bd-placeholder-img card-img-top" width="100%">`;
             document.getElementById('rna-name-1').textContent = aminoAcid.codonName.slice(0, -3);
         }
         document.getElementById('show1').textContent = codon;
@@ -130,7 +131,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
                 //add if bloc here to check the situation of STOP
 
-                const lst = capturedLstSeq ? capturedLstSeq.match(/.{1,3}/g) : [];
                 const displayElement = document.getElementById('rna-display');
                 const tableBody = document.querySelector('#amino-acid-table tbody');
                 const animationDelay = 6400 / (2 ** capturedSpeed);
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     if (codon.length == 1) {
                         //need to add 1 spinner for the table
                         tableBody.appendChild(createSpinner());
-                    }else{
+                    } else {
                         // (codon from 1 bit to 2 bits) or (from 2 bits to 3 bits)
                         // we dont change the last span already exist, but remove the original one and then add a new span
                         displayElement.removeChild(displayElement.lastChild);
@@ -155,12 +155,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     if (codon.length == 3) {
                         //update and apply animations if a new codon is completed
                         const lastSpan = displayElement.lastChild;
-                        updateSpan(lastSpan,animationDelay);
+                        updateSpan(lastSpan, animationDelay);
                         updateAminoAcidTableRow(aminoAcid, tableBody.lastChild, animationDelay);
                         //reset the style of previous span 
-                        if(cur.length > 1){
+                        if (cur.length > 1) {
                             const secondLastSpan = displayElement.lastElementChild.previousElementSibling;
-                            resetSpan(secondLastSpan,animationDelay);
+                            resetSpan(secondLastSpan, animationDelay);
                         }
                     }
                 }
@@ -169,19 +169,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 if (capturedLstSeq && (!capturedCurSeq || capturedCurSeq.length < capturedLstSeq.length)) {
                     // remove the last span
                     displayElement.removeChild(displayElement.lastChild);
-            
+
                     const codon = cur[cur.length - 1];
                     //if codon doesn't exist(empty Seq) or current codon has 3 bits, means we need to remove the last line of table.
-                    if (!codon||codon.length==3) {
+                    if (!codon || codon.length == 3) {
                         tableBody.removeChild(tableBody.lastChild);
-                    }else{
+                    } else {
                         //otherwise we change the last line and the last span
                         const span = createCodonSpan(codon);
                         const lastSpan = displayElement.lastChild;
                         displayElement.appendChild(span);
                         if (codon.length == 2) {
                             //(codon from 3 bits to 2 bits), reset the last completed span
-                            if(capturedCurSeq.length > 3){
+                            if (capturedCurSeq.length > 3) {
                                 setTimeout(() => {
                                     lastSpan.className = 'btn btn-primary form-label p-1 me-1 transition';
                                 }, animationDelay);
@@ -236,13 +236,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
         return span;
     }
 
-    function updateSpan(span,delay){
+    function updateSpan(span, delay) {
         setTimeout(() => {
             span.className = 'btn btn-primary form-label p-1 me-1 transition';
         }, delay);
     }
 
-    function resetSpan(span,delay){
+    function resetSpan(span, delay) {
         setTimeout(() => {
             span.className = 'btn btn-secondary form-label p-1 me-1 transition';
         }, delay);
