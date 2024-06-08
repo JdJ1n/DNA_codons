@@ -266,7 +266,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                   </td>
                   <td class="col-6 col-sm-6">
                     <div class="card shadow-sm card-min-height transition" style="opacity: 0.1;">
-                      <img class="card-img-top" src="images/${aminoAcid.codonName}.svg" alt="${aminoAcid.codonName}" height="225px">
+                      <img class="card-img-top" src="images/${aminoAcid.codonName}.svg" alt="${aminoAcid.codonName}" height="100px">
                     </div>
                   </td>
                 </tr>`;
