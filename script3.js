@@ -85,8 +85,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
             document.getElementById('rna-name-1').textContent = "";
         } else {
             document.getElementById('amino-acid-image').innerHTML =
-                `<img src="images/${aminoAcid.codonName}.svg" alt="${aminoAcid.codonName}" class="bd-placeholder-img card-img-top" width="100%">`;
-            document.getElementById('rna-name-1').textContent = aminoAcid.codonName.slice(0, -3);
+                `<img src="images/${aminoAcid.codonName}.svg" alt="${aminoAcid.codonName}" height="300px" class="bd-placeholder-img card-img-top" width="100%">`;
+            document.getElementById('rna-name-1').textContent = aminoAcid.codonName.slice(0, -3)+' '+aminoAcid.abbrev;
         }
         document.getElementById('show1').textContent = codon;
     }
